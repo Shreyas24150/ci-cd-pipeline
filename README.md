@@ -14,8 +14,6 @@ Launch an Ubuntu EC2 instance from the AWS console.
 
 **Connect to Your EC2 Instance via SSH and Run These Commands:**
 
-```bash
-
 # Update your package list
 sudo apt update
 
@@ -31,7 +29,7 @@ sudo systemctl enable docker
 # Install Git (we'll need this later, though not directly in the GitHub Action)
 sudo apt install git
 
-** Crucial: Open Your Ports! **
+**Crucial: Open Your Ports!**
 Make sure EC2 instance's security group allows inbound traffic on:
 
   Port 22 (SSH): For secure shell access.
@@ -43,7 +41,6 @@ Make sure EC2 instance's security group allows inbound traffic on:
 
 **project structure**
 
-```bash
 /your-repo
 ├── app.py              # Flask application code
 ├── requirements.txt    # Python dependencies for Flask app
@@ -56,7 +53,6 @@ Make sure EC2 instance's security group allows inbound traffic on:
 
 ## 3. Add the deploy.yml Workflow
 
-```bash
 name: Deploy to EC2
 
 on:
