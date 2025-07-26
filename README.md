@@ -41,13 +41,14 @@ Make sure EC2 instance's security group allows inbound traffic on:
 
 **project structure**
 ```bash
-/your-repo
+your-repo
 ├── app.py              # Flask application code
 ├── requirements.txt    # Python dependencies for Flask app
 ├── Dockerfile          # Instructions to build Docker image
 ├── docker-compose.yml  # Defines Flask service for Docker Compose
 └── .github/workflows/  # This is where our CI/CD workflow lives
     └── deploy.yml      # GitHub Actions workflow file
+```
 
 ---
 
