@@ -6,14 +6,14 @@ In this repositery i have made a pipeline using github actions to deploy my simp
 
 ##  1. EC2 Instance Preparation (One-Time Setup)
 
-First we need to prepare EC2 instance.
+    First we need to prepare EC2 instance.
 
 **Launch an Ubuntu EC2 Instance:**
 
-Launch an Ubuntu EC2 instance from the AWS console.
+    Launch an Ubuntu EC2 instance from the AWS console.
 
 **Connect to Your EC2 Instance via SSH and Run These Commands:**
-
+```bash
 # Update your package list
 sudo apt update
 
@@ -28,6 +28,7 @@ sudo systemctl enable docker
 
 # Install Git (we'll need this later, though not directly in the GitHub Action)
 sudo apt install git
+```
 
 **Crucial: Open Your Ports!**
 Make sure EC2 instance's security group allows inbound traffic on:
@@ -53,24 +54,24 @@ your-repo
 ---
 
 ## 3. Add the deploy.yml Workflow
-
+```bash
 name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main # This workflow triggers on pushes to the 'main' branch
+      - main   # This workflow triggers on pushes to the 'main' branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # The type of runner that the job will run on
+    runs-on: ubuntu-latest   # The type of runner that the job will run on
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3 # Checks out repository under $GITHUB_WORKSPACE
+      uses: actions/checkout@v3   # Checks out repository under $GITHUB_WORKSPACE
 
     - name: Copy files to EC2
-      uses: appleboy/scp-action@master  # Action to securely copy files to EC2
+      uses: appleboy/scp-action@master   # Action to securely copy files to EC2
       with:
         host: ${{ secrets.EC2_HOST }}   # EC2 public IP (from GitHub Secrets)
         username: ubuntu                # Default username for Ubuntu EC2 instances
@@ -88,6 +89,7 @@ jobs:
           cd /home/ubuntu/app           # Navigate to application directory
           docker compose down           # Stop any running Docker Compose services
           docker compose up --build -d  # Build images (if needed) and start services in detached mode
+```
 
 ---
 
@@ -98,9 +100,11 @@ jobs:
  3. Click on New repository secret.
 
 **need to create two secrets:**
-EC2_HOST : EC2 Instance's Public IP Address.
-EC2_KEY : contents of EC2 private key file (.pem file)
-    How to EC2 private key : open your-key.pem file copy that content and paste it to EC2_KEY
+```bash
+      EC2_HOST : EC2 Instance's Public IP Address.
+      EC2_KEY : contents of EC2 private key file (.pem file)
+      How to EC2 private key : open your-key.pem file copy that content and paste it to EC2_KEY
+```
 
 ---
 
