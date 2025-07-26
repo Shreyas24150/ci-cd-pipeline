@@ -29,6 +29,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_KEY }}
         script: |
+          sudo apt-get update
+          sudo apt-get install docker-compose-plugin -y
           cd /home/ubuntu/app
           docker compose down
           docker compose up --build -d
