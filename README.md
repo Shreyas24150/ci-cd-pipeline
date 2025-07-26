@@ -40,7 +40,7 @@ Make sure EC2 instance's security group allows inbound traffic on:
 ## 2. Set Up Your Repository for CI/CD
 
 **project structure**
-
+```bash
 /your-repo
 ├── app.py              # Flask application code
 ├── requirements.txt    # Python dependencies for Flask app
